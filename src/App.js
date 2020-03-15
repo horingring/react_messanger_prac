@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import AppChannel from './AppChannel'
+import AppChattingView from './AppChattingView'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//출처 : https://snutiise.github.io/chatting-app/  이 사이트를 참고하여 연습함.
+
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      channel : 'horingring'
+    };
+    this.updateChannel = this.updateChannel.bind(this);
+  }
+
+  updateChannel(channel){
+    this.setState({
+      channel : channel
+    });
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <AppChannel 
+          channel={this.state.channel} 
+          onUpdate={this.updateChannel}
+        ></AppChannel>
+        <AppChattingView 
+          channel={this.state.channel}
+        ></AppChattingView>
+      </div>
+    );
+  }
 }
 
 export default App;
